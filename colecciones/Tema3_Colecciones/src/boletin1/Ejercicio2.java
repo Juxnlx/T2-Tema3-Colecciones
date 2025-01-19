@@ -69,6 +69,7 @@ public class Ejercicio2 {
 		//Asiganamos a la variable media la ecuación suma entre el número de números que hay.
 		media = (suma/sizeLista);
 		
+		//Mostramos la lista de números aleatorios.
 		System.out.print("Lista de números aleatorios --> ");
 		
 		//Imprimimos la lista recorriendola con un for-each.
