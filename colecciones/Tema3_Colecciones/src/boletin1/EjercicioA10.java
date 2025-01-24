@@ -69,10 +69,9 @@ public class EjercicioA10 {
 				System.out.print("Introduce el producto a buscar: ");
 				producto = sc.nextLine();
 
-				if (!almacen.containsKey(producto)) {
+				if (almacen.containsKey(producto)) {
 					System.out.println("¡Perfecto! El producto ha sido eliminado correctamente.");
 					almacen.remove(producto);
-					System.out.println("¡Lo siento! El producto ya existe.");
 				} else {
 					System.out.println("¡Lo siento! El producto que quieres eliminar no existe.");
 				}
@@ -80,7 +79,17 @@ public class EjercicioA10 {
 
 			// En el caso de introducir 3...
 			case 3 -> {
-				
+
+				if (!almacen.isEmpty()) {
+					// Hacemos uso del método keySet para recorrer las claves y luego con la clave
+					// usamos el metodo get para coger el valor de ese número (las veces que se
+					// repite).
+					for (String productos : almacen.keySet()) {
+						System.out.println(productos + ": " + almacen.get(productos) + " euros");
+					}
+				} else {
+					System.out.println("La lista esta vacia");
+				}
 			}
 
 			// En el caso de introducir 0...
@@ -97,8 +106,14 @@ public class EjercicioA10 {
 			}
 
 			}
+
+			// Salto de linea.
+			System.out.println();
+
+			// Comprobamos si la opción introducida es distinta de 0, si es así volvemos a
+			// ejecutar el bucle.
 		} while (opc != 0);
-		
+
 		// Cierre de Scanner
 		sc.close();
 	}
