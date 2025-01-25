@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 public class EjercicioA10 {
 
-	/*
-	 * PREGUNTAR A ELENA COMO MOSTRAR UN MAPA
-	 */
 	public static void main(String[] args) {
 
 		// Creamos un HashMap ya que el orden no es importante para almacenar nombre de
@@ -34,30 +31,46 @@ public class EjercicioA10 {
 		// ejecutar el menú.
 		do {
 
+			// Mostramos el menú con las distintas opciones que puede elegir el usuario.
 			System.out.println("PRODUCTOS");
 			System.out.println("1. Alta de producto");
 			System.out.println("2. Baja de producto");
 			System.out.println("3. Listar existencias");
 			System.out.println("0. Salir");
 			System.out.println();
+
+			// Le pedimos al usuario que introduzca una opción y la leemos.
 			System.out.println("Introduce la opción a ejecutar --> ");
 			opc = sc.nextInt();
+			// Limpiamos el buffer.
 			sc.nextLine();
 
+			// Con este switch controlamos todas las opciones introducidas por el usuario.
 			switch (opc) {
 
 			// En el caso de introducir 1...
 			case 1 -> {
-				// Le pedimos al usuario que introduzca un producto y lo leemos.
-				System.out.print("Introduce un producto: ");
-				producto = sc.nextLine();
-				// Le pedimos al usuario que introduzca un precio y lo leemos.
-				System.out.print("Introduce un precio: ");
-				precio = sc.nextDouble();
+				do {
+					// Le pedimos al usuario que introduzca un producto y lo leemos.
+					System.out.print("Introduce un producto: ");
+					producto = sc.nextLine();
+					// Le pedimos al usuario que introduzca un precio y lo leemos.
+					System.out.print("Introduce un precio: ");
+					precio = sc.nextDouble();
+					sc.nextLine();
 
+					// Comprobamos si el producto es cadena vacias y el precio negativo, en ese caso
+					// volvemos a preguntar por un producto y precio.
+				} while (producto.isEmpty() || precio <= 0);
+
+				// Comprobamos mediante el metodo containsKey si el producto aparece en el mapa,
+				// si es así le decimos al usuario que no se ha podido insertar el producto
+				// porque ya existe.
 				if (almacen.containsKey(producto)) {
 					System.out.println("¡Lo siento! El producto ya existe.");
+					// Si no...
 				} else {
+					// Añadimos al almacen el nuevo producto.
 					System.out.println("¡Perfecto! El producto ha sido añadido correctamente.");
 					almacen.put(producto, precio);
 				}
@@ -69,10 +82,13 @@ public class EjercicioA10 {
 				System.out.print("Introduce el producto a buscar: ");
 				producto = sc.nextLine();
 
+				// Comprobamos si el producto existe en el almacen, si es así lo eliminamos.
 				if (almacen.containsKey(producto)) {
 					System.out.println("¡Perfecto! El producto ha sido eliminado correctamente.");
 					almacen.remove(producto);
+					// Si no...
 				} else {
+					// Indicamos que el producto no existe y por lo tanto no se ha podido eliminar.
 					System.out.println("¡Lo siento! El producto que quieres eliminar no existe.");
 				}
 			}
@@ -80,6 +96,7 @@ public class EjercicioA10 {
 			// En el caso de introducir 3...
 			case 3 -> {
 
+				// Comprobamos si el almacen no esta vacio, en ese caso lo imprimimos.
 				if (!almacen.isEmpty()) {
 					// Hacemos uso del método keySet para recorrer las claves y luego con la clave
 					// usamos el metodo get para coger el valor de ese número (las veces que se
@@ -87,7 +104,9 @@ public class EjercicioA10 {
 					for (String productos : almacen.keySet()) {
 						System.out.println(productos + ": " + almacen.get(productos) + " euros");
 					}
+					// Si no...
 				} else {
+					// Mostramos un mensaje informando que la lista esta vacia.
 					System.out.println("La lista esta vacia");
 				}
 			}
