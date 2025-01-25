@@ -36,7 +36,7 @@ public class Ejercicio7 {
 			System.out.println("2. Buscar palabra");
 			System.out.println("0. Salir");
 			System.out.println();
-			System.out.println("Introduce la opción a ejecutar --> ");
+			System.out.println("Seleccione una opción --> ");
 			opc = sc.nextInt();
 			sc.nextLine();
 
@@ -54,15 +54,27 @@ public class Ejercicio7 {
 				System.out.print("Introduce su traducción en ingles: ");
 				palabraIng = sc.nextLine();
 
-				// Hacemos uso del método put para añadir las palabras introducidas por el
-				// usuario en el mapa.
-				diccionario.put(palabraEsp, palabraIng);
+				// Comprobamos mediante el método isEmpty si las palabras introducidas son
+				// cadenas vacias, si es así mostramos un error.
+				if (palabraEsp.isEmpty() || palabraIng.isEmpty()) {
+					System.err.println("No puedes ingresar una palabra vacía.");
+					// Comprobamos si la palabras introducida ya ha sido añadida al diccionario, si
+					// es así mostramos un error.
+				} else if (diccionario.containsKey(palabraEsp)) {
+					System.err.println("¡Lo siento! Esa palabra ya existe en el diccionario.");
+					// Si no...
+				} else {
+					// Hacemos uso del método put para añadir las palabras introducidas por el
+					// usuario en el mapa.
+					diccionario.put(palabraEsp, palabraIng);
+					System.out.println("Palabra añadida correctamente.");
+				}
 
 				// Salto de linea
 				System.out.println();
 			}
 
-			// En el caso de introducir 1...
+			// En el caso de introducir 2...
 			case 2 -> {
 
 				// Le pedimos al usuario que introduzca la palabra en español para hacer la
@@ -70,10 +82,15 @@ public class Ejercicio7 {
 				System.out.print("Introduce la palabra de la que quieres saber su traducción: ");
 				palabraEsp = sc.nextLine();
 
-				// Comprobamos si esa palabra existe en el mapa con el método containsKey, si
-				// existe devolvemos el valor de esa palabra, la traducción en ingles de la
-				// palabra introducida.
-				if (diccionario.containsKey(palabraEsp)) {
+				// Comprobamos mediante el método isEmpty si las palabras introducidas son
+				// cadenas vacias, si es así mostramos un error.
+				if (palabraEsp.isEmpty()) {
+					System.err.println("No puedes ingresar una palabra vacía.");
+
+					// Comprobamos si esa palabra existe en el mapa con el método containsKey, si
+					// existe devolvemos el valor de esa palabra, la traducción en ingles de la
+					// palabra introducida.
+				} else if (diccionario.containsKey(palabraEsp)) {
 					// A la variable palabraIng le asignamos el valor que nos devuelve el método get
 					// de la clave introducida.
 					palabraIng = diccionario.get(palabraEsp);
@@ -83,7 +100,7 @@ public class Ejercicio7 {
 					// En el caso de que no se encuentre en el mapa, indicamos que la palabra
 					// introducida no existe.
 				} else {
-					System.out.println("La palabra introducida no se encuentra en el mapa");
+					System.err.println("La palabra no está en el diccionario.");
 				}
 
 				// Salto de linea
