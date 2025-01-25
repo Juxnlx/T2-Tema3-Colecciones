@@ -3,9 +3,6 @@ package boletin1;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-/**
- * ESTA MAL NO SE COMO HACELRO VOY A LLORAR DE VD 😭
- */
 public class Ejercicio9 {
 
 	public static void main(String[] args) {
@@ -25,10 +22,6 @@ public class Ejercicio9 {
 		// Creamos la variable estrellasEM como int para almacenar las estrellas
 		// introducidas por el usuario.
 		int estrellasEM;
-
-		// Creamos la variable continuar como boolean para para saber cuando salir del
-		// bucle o cuando comprobar otros números y estrellas.
-		boolean continuar;
 
 		// Creamos la variable opcSalida como char para almacenar la opción de si desea
 		// seguir o salir.
@@ -107,14 +100,11 @@ public class Ejercicio9 {
 			System.out.println("T, si quieres continuar");
 			System.out.println("Cualquier otro valor para salir \n");
 			System.out.println("Introduce una opción: ");
-			opcSalida = sc.nextLine().charAt(0);
-
-			// Comprobamos si la opción es 'T', si lo es devolvemos true sino false.
-			continuar = opcSalida == 'T' ? true : false;
+			opcSalida = sc.nextLine().toUpperCase().charAt(0);
 
 			// Comprobamos si la opción introducida por el usuario nos ha devuelto true o
 			// false.
-		} while (continuar);
+		} while (opcSalida == 'T');
 
 		// Imprimimos un mensaje de fin de programa.
 		System.out.println("Saliendo...");
