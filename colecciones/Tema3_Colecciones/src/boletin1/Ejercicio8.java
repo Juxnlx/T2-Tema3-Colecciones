@@ -58,6 +58,23 @@ public class Ejercicio8 {
 				System.out.print("Introduce una contraseña: ");
 				password = sc.nextLine();
 
+				// Comprobamos mediante el método isEmpty si el usuario y la contraseña
+				// introducidas no son cadenas vacias.
+				if (nombreUsuario.isEmpty() || password.isEmpty()) {
+					System.err.println("No puedes ingresar una palabra vacía.");
+
+					// Comprobamos si el usuario introducido existe en el programa.
+				} else if (programaBD.containsKey(nombreUsuario)) {
+					System.err.println("¡Lo siento! Este usuario ya ha sido registrado.");
+
+					// Si no...
+				} else {
+					// Hacemos uso del método put para añadir el nuevo usuario y la contraseña al
+					// programa.
+					programaBD.put(nombreUsuario, password);
+					System.out.println("Usuario añadido correctamente.");
+				}
+
 				// Hacemos uso del método put para añadir el usuario y la contraseña en la base
 				// de datos del programa.
 				programaBD.put(nombreUsuario, password);
@@ -71,7 +88,7 @@ public class Ejercicio8 {
 
 				// Comprobamos si el números de intentos no se ha agotado o si aun no se ha
 				// iniciado sesión en ese caso volvemos a ejecutar el bucle.
-				while (contIntentos != 0 && !registroCorrecto) {
+				while (contIntentos > 0 && !registroCorrecto) {
 					// Le pedimos al usuario que introduzca un nuevo nombre de usuario y lo leemos.
 					System.out.print("Introduce tu nombre de usuario: ");
 					nombreUsuario = sc.nextLine();
@@ -87,15 +104,25 @@ public class Ejercicio8 {
 						// Ponemos la variable registroCorrecto como true, para indicar que se ha
 						// iniciado sesión y no volver a preguntar mas.
 						registroCorrecto = true;
+						// Reiniciamos intentos para futuros inicios de sesión.
+						contIntentos = 3;
+
 						// En el caso de que el usuario o contraseña sean incorrectos, lo indicamos y le
 						// mostramos al usuario los intentos que le quedan.
-						
 					} else {
-						//Decrementamos el número de intentos en -1.
+						// Decrementamos el número de intentos en -1.
 						contIntentos--;
-						System.out.println("Lo siento, no tiene acceso al área restringida");
-						System.out.println("Intentos restantes: " + contIntentos);
-						
+						System.out.println("Usuario o contraseña incorrectos.");
+
+						// Si el contador de intentos es mayor que 0, mostramos el número de intentos.
+						if (contIntentos > 0) {
+							System.out.println("Intentos restantes: " + contIntentos);
+							// Si no...
+						} else {
+							//Le restringimos el acceso.
+							System.out.println("Lo siento, no tiene acceso al área restringida.");
+						}
+
 					}
 				}
 				// Salto de linea
