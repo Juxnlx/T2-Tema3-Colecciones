@@ -128,7 +128,7 @@ public class Ejercicio8 {
 				// Imprimimos la categoria y todos sus tareas.
 				System.out.println("----------" + catg + "-----------");
 				// Recorremos cada tarea y la vamos mostrando de linea en linea.
-				for (String tareas : conjuntoTarea) {
+				//for (String tareas : conjuntoTarea) {
 					System.out.println("- " + tareas + "\n");
 				}
 
