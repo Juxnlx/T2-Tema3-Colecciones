@@ -122,16 +122,28 @@ public class Ejercicio8 {
 				System.out.print("Introduce una categoria: ");
 				catg = sc.nextLine();
 
-				// Asignamos al conjuntoTarea el conjunto de dicha categoria.
-				conjuntoTarea = tareasPorCatg.get(catg);
+				// Cmprobamos si la categoria introducida por el no existe, si es así mostramos
+				// un mensaje.
+				if (!tareasPorCatg.containsKey(catg)) {
+					System.out.println("La categoria introducida NO EXISTE");
 
-				// Imprimimos la categoria y todos sus tareas.
-				System.out.println("----------" + catg + "-----------");
-				// Recorremos cada tarea y la vamos mostrando de linea en linea.
-				//for (String tareas : conjuntoTarea) {
-					System.out.println("- " + tareas + "\n");
+					// Si no...
+				} else {
+					// Asignamos al conjuntoTarea el conjunto de dicha categoria.
+					conjuntoTarea = tareasPorCatg.get(catg);
+					// Comprobamos si el conjunto de esa categoria esta vacio, si es así se lo
+					// comunicamos al usuario.
+					if (conjuntoTarea.isEmpty()) {
+						// Si no
+					} else {
+						// Imprimimos la categoria y todos sus tareas.
+						System.out.println("----------" + catg.toUpperCase() + "-----------");
+						// Recorremos cada tarea y la vamos mostrando de linea en linea.
+						for (String tareas : conjuntoTarea) {
+							System.out.println("- " + tareas);
+						}
+					}
 				}
-
 			}
 
 			// Salir
