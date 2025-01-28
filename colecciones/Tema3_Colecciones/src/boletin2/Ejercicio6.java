@@ -1,7 +1,7 @@
 package boletin2;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Ejercicio6 {
@@ -9,7 +9,10 @@ public class Ejercicio6 {
 	public static void main(String[] args) {
 
 		// Creamos este mapa para agrupar por nombres los números de teléfono que tenga.
-		HashMap<String, ArrayList<Integer>> libretaDirec = new HashMap<String, ArrayList<Integer>>();
+		HashMap<String, HashSet<Integer>> libretaDirec = new HashMap<String, HashSet<Integer>>();
+
+		// Declaramos el conjunto números donde almacenaremos los números de telefono.
+		HashSet<Integer> numeros;
 
 		// Creamos la variable nombreUsuario como String para almacenar el nombre de la
 		// personas que se vayan añadiendo a la libreta.
@@ -61,8 +64,8 @@ public class Ejercicio6 {
 					System.err.println("El nombre introducido ya existe en la libreta de contactos.");
 					// Si no...
 				} else {
-					// Creamos una nueva lista vacía de números.
-					ArrayList<Integer> numeros = new ArrayList<>();
+					// Creamos el conjunto números vacia.
+					numeros = new HashSet<>();
 					// Añadimos el nombre introducido a la libreta.
 					libretaDirec.put(nombreUsuario, numeros);
 					// Imprimimos un mensaje mostrandole al usurio que el nombre ha sido introducido
@@ -86,12 +89,12 @@ public class Ejercicio6 {
 
 					// Obtener la lista de teléfonos de esa persona y añadir el número nuevo.
 					libretaDirec.get(nombreUsuario).add(numMovil);
-					//Mostramos un mensaje de que el número ha sido introducido con exito.
+					// Mostramos un mensaje de que el número ha sido introducido con exito.
 					System.out.println("\033[32m El número ha sido agregado correctamente.");
 				} else {
 					// Imprimimos un mensaje diciendole al usuario que el nombre no esta en la
 					// agenda.
-					System.err.println("¡Lo siento! El nombre introducido no se encuentra en la lista.");
+					System.err.println("¡Lo siento! El nombre introducido no se encuentra en el conjunto.");
 				}
 			}
 
@@ -104,7 +107,7 @@ public class Ejercicio6 {
 				if (libretaDirec.containsKey(nombreUsuario)) {
 
 					// Obtenemos la lista de números de la persona introducida por el usuario.
-					ArrayList<Integer> numeros = libretaDirec.get(nombreUsuario);
+					numeros = libretaDirec.get(nombreUsuario);
 
 					// Si la lista no tiene ningun número, avisamos al usuario.
 					if (numeros.isEmpty()) {
@@ -130,7 +133,7 @@ public class Ejercicio6 {
 				if (libretaDirec.containsKey(nombreUsuario)) {
 
 					// Obtenemos la lista de números de la persona introducida por el usuario.
-					ArrayList<Integer> numeros = libretaDirec.get(nombreUsuario);
+					numeros = libretaDirec.get(nombreUsuario);
 
 					// Si la lista no tiene ningun número, avisamos al usuario.
 					if (numeros.isEmpty()) {
