@@ -134,6 +134,7 @@ public class Ejercicio8 {
 					// Comprobamos si el conjunto de esa categoria esta vacio, si es así se lo
 					// comunicamos al usuario.
 					if (conjuntoTarea.isEmpty()) {
+						System.out.println("El conjunto esta vacio");
 						// Si no
 					} else {
 						// Imprimimos la categoria y todos sus tareas.
