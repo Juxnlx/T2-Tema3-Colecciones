@@ -15,11 +15,15 @@ public class Ejercicio1 {
 
 		// Nos creamos un TreeMap para almacenar de forma alfabetica cada palabra de las
 		// frases y donde aparecen.
-		TreeMap<String, TreeSet<Integer>> encontarPalabras = new TreeMap<String, TreeSet<Integer>>();
+		TreeMap<String, TreeSet<Integer>> encontrarPalabras = new TreeMap<String, TreeSet<Integer>>();
 
 		// Nos creamos un TreeSet para almacenar en las frases donde aparece cada
 		// palabra.
 		TreeSet<Integer> numeros;
+
+		// Declaramos el array tablaPalabras como String para almacenar las frases de
+		// una palabra.
+		String[] tablaPalabras;
 
 		// Nos creamos la variable frase como String para almacenar la palabra
 		// introducida por el usuario.
@@ -33,44 +37,70 @@ public class Ejercicio1 {
 		Scanner sc = new Scanner(System.in);
 
 		do {
-			// Le pedimos al usuario que introduzca una frase y la leemos por teclado.
+			// Le pedimos al usuario que introduzca una frase y la leemos. Usamos el metodo
+			// trim para eliminar los espacios de delante y atras.
 			System.out.println("Introduce una frase: ");
-			frase = sc.nextLine();
-			// Comprobamos si la frase introducida esta vacia, si es así se vuelve a
-			// preguntar por una frase
-		} while (frase.isEmpty());
+			frase = sc.nextLine().trim();
+			// Comprobamos si la frase es distinta de end, si es así la añadimos a nuestra
+			// lista frases.
+			if (!frase.equalsIgnoreCase("END")) {
+				// Añadimos la frase a la lista.
+				frases.add(frase);
+			}
+			// Comprobamos si la frase es distinta de end, si es así volvemos a pedir otra
+			// frase.
+		} while (!frase.equalsIgnoreCase("END"));
 
-		// Comprobamos si la frase no esta vacia y si la frase es distinto a end, en ese
-		// caso salimos del bucle.
-		while (!frase.isEmpty() && !frase.equalsIgnoreCase("end")) {
+		// Añadimos en el array cada palabra de la frase.
+		tablaPalabras = frase.split(" ");
 
-			// Añadimos la frase a la lista frase.
-			frases.add(frase);
+		// Recorremos la lista de frases para saber que frase estamos recorriendo en
+		// cada momento.
+		for (int numLinea = 0; numLinea < frases.size(); numLinea++) {
 
-			//Recorremos la lista para frases para ir recorriendo frase por frase.
-			for (int i = 0; i < frases.size(); i++) {
-				//Almacenamos en palabra la frase que vamos a recorrer.
-				palabra = frases.get(i);
+			// Almacenamos en la variable frase, la frase que estamos recorriendo en este
+			// momento.
+			frase = frases.get(numLinea).toLowerCase();
+			// En el array tablaPalabras almacenamos cada palabra con el metodo split.
+			tablaPalabras = frase.split(" ");
 
-				for (int j = 0; j < palabra.length(); j++) {
+			// Recorremos el array tablaPalabras para recorrer cada palabra.
+			for (int i = 0; i < tablaPalabras.length; i++) {
+				// Almacenamos en palabra la palabra que estamos recorriendo en este momento de
+				// la frase.
+				palabra = tablaPalabras[i];
 
-					if (palabra.length() > 2) {
+				// Comprobamos si la palabra es mayor que 2, si es así comprobamos
+				if (palabra.length() > 2) {
 
-						if (encontarPalabras.containsKey(palabra)) {
-							
-						} else {
-							numeros = new TreeSet<Integer>();
-							
-						}
+					// Comprobamos si la palabra existe en el mapa, si es así...
+					if (encontrarPalabras.containsKey(palabra)) {
+
+						// Almacenamos en el conjunto número el conjunto que nos devuelve el mapa con
+						// esa clave.
+						numeros = encontrarPalabras.get(palabra);
+						// Almacenamos en el conjunto el número de frase.
+						numeros.add(numLinea + 1);
+
+						// Si no...
+					} else {
+						// Creamos el cojunto numeros.
+						numeros = new TreeSet<Integer>();
+						// Añadimos el número de la frase.
+						numeros.add(numLinea + 1);
+						// Añadimos el conjunto a la frase concreta.
+						encontrarPalabras.put(palabra, numeros);
+
 					}
-
 				}
 
 			}
+		}
 
-			// Le pedimos al usuario que introduzca una frase y la leemos por teclado.
-			System.out.println("Introduce una frase: ");
-			frase.length();
+		System.out.println("\n ¿Donde aparece cada palabra?");
+		//Imprimimos el mapa con cada palabra y su conjunto.
+		for (String fraseJuego : encontrarPalabras.keySet()) {
+			System.out.println(fraseJuego + ": " + encontrarPalabras.get(fraseJuego));
 		}
 
 		// Cierre de Scanner
